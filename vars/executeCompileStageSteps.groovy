@@ -33,6 +33,8 @@ def call() {
 
     writeFile(file: 'dynamic-settings.xml', text: settingsText)
 
+    sh("echo dynamic-settings.xml")
+
     sh("mvn -Djacoco.skip=true -e -s dynamic-settings.xml clean test-compile")
 
     echo("Completed [Compile] stage steps.")
