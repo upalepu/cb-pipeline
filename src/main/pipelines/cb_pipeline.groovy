@@ -5,7 +5,7 @@ folder('pipelines') {
     description("The base folder containing pipelines managed by JaC.")
 }
 
-multibranchPipelineJob('pipelines/cicd-app-pipeline') {
+multibranchPipelineJob('pipelines/cb-pipeline') {
     displayName('CICD Application Pipeline')
     description('Declarative Pipeline for the cicd app demo.')
 
