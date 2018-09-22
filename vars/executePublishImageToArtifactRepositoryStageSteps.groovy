@@ -13,6 +13,7 @@ def call() {
     def dockerRegistryTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
     def dockerRegistryTagLatest = "${dockerHostAndDockerPort}/${dockerImageTagLatest}"
 
+    sh("docker version")
     sh("docker build -t ${dockerImageTag} -t ${dockerImageTagLatest} -t ${dockerRegistryTag} -t ${dockerRegistryTagLatest} --build-arg JAR_FILE=${jarFile} .")
 
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
