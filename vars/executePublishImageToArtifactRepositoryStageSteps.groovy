@@ -12,12 +12,14 @@ def call() {
     def dockerHostAndDockerPort = "${NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
     def dockerRegistryTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
     def dockerRegistryTagLatest = "${dockerHostAndDockerPort}/${dockerImageTagLatest}"
+    def internalNexusHostAndPort = "${INTERNAL_NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
 
     sh("sudo docker build -t ${dockerImageTag} -t ${dockerImageTagLatest} -t ${dockerRegistryTag} -t ${dockerRegistryTagLatest} --build-arg JAR_FILE=${jarFile} .")
-    sh("sleep 10m")
+    sh("sleep 3m")
 
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
         sh("echo ${LOGIN_PASSWORD} | sudo docker login --username ${LOGIN_USERNAME} --password-stdin ${dockerHostAndDockerPort}")
+//        sh("echo ${LOGIN_PASSWORD} | sudo docker login --username ${LOGIN_USERNAME} --password-stdin ${internalNexusHostAndPort}")
     }
 
     sh("sudo docker push ${dockerRegistryTag}")
