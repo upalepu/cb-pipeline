@@ -13,7 +13,6 @@ def call() {
     def dockerRegistryTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
     def dockerRegistryTagLatest = "${dockerHostAndDockerPort}/${dockerImageTagLatest}"
 
-/*
     sh("sudo docker build -t ${dockerImageTag} -t ${dockerImageTagLatest} -t ${dockerRegistryTag} -t ${dockerRegistryTagLatest} --build-arg JAR_FILE=${jarFile} .")
 
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
@@ -22,7 +21,7 @@ def call() {
 
     sh("sudo docker push ${dockerRegistryTag}")
     sh("sudo docker push ${dockerRegistryTagLatest}")
-*/
+/*
     echo("before with credentials")
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
         echo("inside withCredentials; before buildimage")
@@ -40,5 +39,6 @@ def call() {
         echo("inside withCredentials; before pushimg ${dockerRegistryTagLatest}")
         pushImage( name: "${artifactId}", tag: "${dockerRegistryTagLatest}", registry: "${dockerHostAndDockerPort}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}" )
     }
+*/
     echo("Completed [Publish Image] stage steps.")
 }
