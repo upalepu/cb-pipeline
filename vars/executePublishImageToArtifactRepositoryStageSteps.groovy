@@ -13,8 +13,7 @@ def call() {
     def dockerRegistryTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
     def dockerRegistryTagLatest = "${dockerHostAndDockerPort}/${dockerImageTagLatest}"
 
-/*
-    sh("docker version")
+//    sh("docker version")
     sh("docker build -t ${dockerImageTag} -t ${dockerImageTagLatest} -t ${dockerRegistryTag} -t ${dockerRegistryTagLatest} --build-arg JAR_FILE=${jarFile} .")
 
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
@@ -23,7 +22,7 @@ def call() {
 
     sh("docker push ${dockerRegistryTag}")
     sh("docker push ${dockerRegistryTagLatest}")
-*/
+/*
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
         buildImage( name: "${artifactId}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}", path: "${jarfile}" )
         tagImage( name: "${artifactId}", tag: "${dockerImageTag}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}" )
@@ -33,6 +32,6 @@ def call() {
         pushImage( name: "${artifactId}", tag: "${dockerRegistryTag}", registry: "${dockerHostAndDockerPort}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}" )
         pushImage( name: "${artifactId}", tag: "${dockerRegistryTagLatest}", registry: "${dockerHostAndDockerPort}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}" )
     }
-
+*/
     echo("Completed [Publish Image] stage steps.")
 }
