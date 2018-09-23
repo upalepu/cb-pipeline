@@ -26,7 +26,7 @@ def call() {
     echo("before with credentials")
     withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'LOGIN_USERNAME', passwordVariable: 'LOGIN_PASSWORD')]) {
         echo("inside withCredentials; before buildimage")
-        buildImage( name: "${artifactId}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}", path: "${jarfile}" )
+        buildImage( name: "${artifactId}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}", path: "${jarFile}" )
         echo("inside withCredentials; before tagimg ${dockerImageTag}")
         tagImage( name: "${artifactId}", tag: "${dockerImageTag}", password: "${LOGIN_PASSWORD}", username: "${LOGIN_USERNAME}" )
         echo("inside withCredentials; before tagimg ${dockerImageTagLatest}")
