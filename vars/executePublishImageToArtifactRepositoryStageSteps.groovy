@@ -13,7 +13,8 @@ def call() {
     def dockerRegistryTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
     def dockerRegistryTagLatest = "${dockerHostAndDockerPort}/${dockerImageTagLatest}"
     def internalNexusHostAndPort = "${INTERNAL_NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
-    def dockerNexusHostAndPort = "${DOCKER_NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
+//    def dockerNexusHostAndPort = "${DOCKER_NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
+    def dockerNexusHostAndPort = "${DOCKER_NEXUS_HOSTNAME}"
 
     sh("sudo docker build -t ${dockerImageTag} -t ${dockerImageTagLatest} -t ${dockerRegistryTag} -t ${dockerRegistryTagLatest} --build-arg JAR_FILE=${jarFile} .")
 
