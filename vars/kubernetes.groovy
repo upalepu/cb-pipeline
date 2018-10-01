@@ -1,11 +1,13 @@
 #!/usr/bin/env groovy
 
+/*
 def setupkubecfg() {
     // The file setupkubecfg.sh contains the logic to create a Config context for the cluster
     // we are interested in. This function should be called before any calls to 
     // kubectl.  
     sh("/opt/bin/setupkubecfg.sh")
 }
+*/
 
 def apply(namespace, externalPort, templateFileName='kubernetes-app-config-template.yml') {
     def pomInfo = readMavenPom()
@@ -26,6 +28,7 @@ def apply(namespace, externalPort, templateFileName='kubernetes-app-config-templ
 
     writeFile(file: appConfigFileName, text: appConfigFileContent)
 
+    sh("/opt/bin/setupkubecfg.sh")
     sh("kubectl apply -f ${appConfigFileName}")
 }
 
