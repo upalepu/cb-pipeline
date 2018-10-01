@@ -1,12 +1,21 @@
 #!/usr/bin/env groovy
 
+def setupkubecfg() {
+    // The file setupkubecfg.sh contains the logic to create a Config context for the cluster
+    // we are interested in. This function should be called before any calls to 
+    // kubectl.  
+    sh("/opt/bin/setupkubecfg.sh")
+}
+
 def apply(namespace, externalPort, templateFileName='kubernetes-app-config-template.yml') {
     def pomInfo = readMavenPom()
     def artifactId = pomInfo.artifactId
     def version = pomInfo.version
     def dockerImageTag = "${artifactId}:${version}"
-    def dockerHostAndDockerPort = "${NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
-    def imageTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
+//    def dockerHostAndDockerPort = "${NEXUS_HOSTNAME}:${NEXUS_SERVICE_PORT_DOCKER}"
+    def dockerNexusHostAndPort = "${DOCKER_NEXUS_HOSTNAME}"
+//    def imageTag = "${dockerHostAndDockerPort}/${dockerImageTag}"
+    def imageTag = "${dockerNexusHostAndPort}/${dockerImageTag}"
     def appConfigFileName = "${namespace}-config.yml"
 
     def appConfigFileTemplate = readFile(file: templateFileName)
