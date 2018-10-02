@@ -25,7 +25,7 @@ def apply(namespace, externalPort, templateFileName='kubernetes-app-config-templ
                                                     .replaceAll('@@EXTERNAL_PORT@@', externalPort)
 
     writeFile(file: appConfigFileName, text: appConfigFileContent)
-
+    sh("sleep 10m")
     sh("kubectl apply -f ${appConfigFileName}")
 }
 
