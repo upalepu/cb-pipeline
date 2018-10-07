@@ -25,7 +25,6 @@ def apply(namespace, externalPort, templateFileName='kubernetes-app-config-templ
                                                     .replaceAll('@@EXTERNAL_PORT@@', externalPort)
 
     writeFile(file: appConfigFileName, text: appConfigFileContent)
-//    sh("sleep 30m")
     sh("kubectl apply -f ${appConfigFileName}")
 }
 
@@ -33,7 +32,6 @@ def testContainer(namespace) {
   def pomInfo = readMavenPom()
   def artifactId = pomInfo.artifactId
 
-    sh("sleep 30m")
   sleep(30)
   //def clusterIPCommand = "kubectl get services --namespace=${namespace} -o jsonpath='{.spec.clusterIP}' ${artifactId}"
   //def clusterIP = sh(script: clusterIPCommand, returnStdout: true).trim()
