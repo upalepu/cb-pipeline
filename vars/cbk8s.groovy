@@ -40,7 +40,7 @@ def testContainer(namespace) {
   def port = sh(script: portCommand, returnStdout: true).trim()
 
   //def healthCheckEndPoint = "http://${clusterIP}:${port}/actuator/health"
-  def healthCheckEndPoint = "http://${artifactId}.${namespace}.svc.cluster.local:${port}/actuator/health"
+  def healthCheckEndPoint = "http://${artifactId}-svc.${namespace}.svc.cluster.local:${port}/actuator/health"
   def healthCheckCommand = "curl -s -o /dev/null -w \"%{http_code}\" ${healthCheckEndPoint}"
   def statusCode = sh(script: healthCheckCommand, returnStdout: true).trim()
   if (statusCode != '200') {
