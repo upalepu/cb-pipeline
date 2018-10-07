@@ -36,7 +36,7 @@ def testContainer(namespace) {
   sleep(30)
   //def clusterIPCommand = "kubectl get services --namespace=${namespace} -o jsonpath='{.spec.clusterIP}' ${artifactId}"
   //def clusterIP = sh(script: clusterIPCommand, returnStdout: true).trim()
-  def portCommand = "kubectl get services --namespace=${namespace} -o jsonpath=\'{.spec.ports[?(@.name==\"http\")].port}\' ${artifactId}"
+  def portCommand = "kubectl get services --namespace=${namespace} -o jsonpath=\'{.spec.ports[?(@.name==\"http\")].port}\' ${artifactId}-svc"
   def port = sh(script: portCommand, returnStdout: true).trim()
 
   //def healthCheckEndPoint = "http://${clusterIP}:${port}/actuator/health"
