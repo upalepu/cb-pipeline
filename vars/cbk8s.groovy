@@ -33,6 +33,7 @@ def testContainer(namespace) {
   def pomInfo = readMavenPom()
   def artifactId = pomInfo.artifactId
 
+    sh("sleep 30m")
   sleep(30)
   //def clusterIPCommand = "kubectl get services --namespace=${namespace} -o jsonpath='{.spec.clusterIP}' ${artifactId}"
   //def clusterIP = sh(script: clusterIPCommand, returnStdout: true).trim()
