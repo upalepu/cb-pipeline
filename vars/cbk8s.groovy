@@ -41,7 +41,8 @@ def testContainer(namespace) {
   echo("port = ${port}") 
 
   //def healthCheckEndPoint = "http://${clusterIP}:${port}/actuator/health"
-  def healthCheckEndPoint = "http://${artifactId}-svc.${namespace}.svc.cluster.local:${port}/actuator/health"
+  //def healthCheckEndPoint = "http://${artifactId}-svc.${namespace}.svc.cluster.local:${port}/actuator/health"
+  def healthCheckEndPoint = "https://${namespace}.palepuweb.org/actuator/health"
   echo("healthCheckEndPoint = ${healthCheckEndPoint}") 
   def healthCheckCommand = "curl -s -o /dev/null -w \"%{http_code}\" ${healthCheckEndPoint}"
   echo("healthCheckCommand = ${healthCheckCommand}") 
