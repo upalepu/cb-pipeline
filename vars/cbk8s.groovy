@@ -42,9 +42,7 @@ def testContainer(namespace) {
   def healthCheckEndPoint = "http://${artifactId}-svc.${namespace}.svc.cluster.local:${port}/actuator/health"
   //def healthCheckEndPoint = "https://${namespace}.palepuweb.org/actuator/health"
   def healthCheckCommand = "curl -s -o /dev/null -w \"%{http_code}\" ${healthCheckEndPoint}"
-  echo("healthCheckCommand = ${healthCheckCommand}") 
   def statusCode = sh(script: healthCheckCommand, returnStdout: true).trim()
-  echo("statusCode = ${statusCode}") 
   if (statusCode != '200') {
       error("Health check failed for endpoint [${healthCheckEndPoint}].")
   }
